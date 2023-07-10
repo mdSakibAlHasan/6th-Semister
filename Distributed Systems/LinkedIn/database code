@@ -1,0 +1,21 @@
+DROP UserInfo;
+DROP PostInfo;
+
+-- Create the UserInfo table
+CREATE TABLE UserInfo (
+  UserID INT AUTO_INCREMENT PRIMARY KEY,
+  Name VARCHAR(255),
+  Email VARCHAR(255),
+  Password VARCHAR(255)
+);
+
+-- Create the PostInfo table
+CREATE TABLE PostInfo (
+  PostID INT AUTO_INCREMENT PRIMARY KEY,
+  UserID INT,
+  Text VARCHAR(255),
+  Image VARCHAR(255),
+  PostTime DATETIME,
+  FOREIGN KEY (UserID) REFERENCES UserInfo(UserID)
+);
+

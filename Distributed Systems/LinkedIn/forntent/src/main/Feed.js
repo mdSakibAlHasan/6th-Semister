@@ -1,5 +1,6 @@
 import { React} from "react";
 import FeedCard from "./FeedCard";
+import { Link } from "react-router-dom";
 
 export default function Feed() {
     const data=[
@@ -10,8 +11,12 @@ export default function Feed() {
         {name:"Niazamum Mahmud", time:"Tomorrow", story:"When the Prophet Muhammad (peace be upon him) was hiding in a cave from his enemies, a spider spun a web over the entrance to the cave. When the enemies came to the cave, they saw the spider web and assumed that nobody could have entered the cave recently. This story teaches us about the importance of using whatever resources we have to protect ourselves and our loved ones.",pic:"picture/a.png"}
     ]
   return (
+    <div>
+    
+    <h3><Link to="/post">Post</Link></h3>
     <div className='shade1 p-3 full_page_height' style={{ display: "inline-block" }}>
         {data.map((feed)=><FeedCard name={feed.name} time={feed.time} story={feed.story} picture={feed.pic}/>)}
+    </div>
     </div>
   )
 };

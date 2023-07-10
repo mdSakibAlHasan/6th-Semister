@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./main/Login.js";
 import Registration from "./main/Registration.js";
 import Feed from "./main/Feed.js";
+import Post from "./main/Post.js";
 
 const router = createBrowserRouter([
   {
@@ -17,15 +18,15 @@ const router = createBrowserRouter([
     path: "/newsFeed",
     element: <Feed/>,
   },
+  {
+    path: "/post",
+    element: <Post/>,
+  },
 ])
 
 function App() {
   return (
     <div className="App">
-      {/* <header className="App-header">
-        
-        <h1>Hellow</h1>
-      </header> */}
       <div>
       <RouterProvider router={router} />
       </div>
