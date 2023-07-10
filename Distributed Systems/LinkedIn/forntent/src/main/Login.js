@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import { AuthContext } from "../compute/authContex";
 // import Navbar from "../Components/Navbar.js";
 
@@ -8,6 +8,7 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const navigate  = useNavigate();
   //const [err, setError] = useState(null);
 
 //   const navigate = useNavigate();
@@ -19,6 +20,7 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     console.log(input," are here ");
+    navigate('/newsFeed');
   };
 
   return (
@@ -62,7 +64,7 @@ export default function Login() {
           <br />
           <center>
             {/* {err && <p>{err}</p>} */}
-            <p>Don't have account <a href="/registration">Register</a> </p>
+            <p>Don't have account <Link to="/registration">Register</Link> </p>
             <button onClick={handleSubmit}>Enter</button>
           </center>
         </div>

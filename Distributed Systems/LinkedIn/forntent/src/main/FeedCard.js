@@ -8,7 +8,7 @@ export default function FeedCard(props) {
                 <div className="display-6">{props.name}</div>
                 <div ><strong>{props.time}</strong></div> <hr/>
                 <div >{props.story}</div> <hr/>
-                <div ><img src='/b.png'  alt="post not found"/> </div> <hr/>
+                <div ><img src='media/sakib/IIT/6th Semister/6th-Semister/Distributed Systems/LinkedIn/forntent/src/picture/b.png'  alt="post not found"/> </div> <hr/>
             </div>    
         </div>
         <br/>
