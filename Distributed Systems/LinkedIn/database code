@@ -1,5 +1,7 @@
+CREATE DATABASE IF NOT EXISTS likedin;
 DROP UserInfo;
 DROP PostInfo;
+USE likedin;
 
 -- Create the UserInfo table
 CREATE TABLE UserInfo (
@@ -19,3 +21,18 @@ CREATE TABLE PostInfo (
   FOREIGN KEY (UserID) REFERENCES UserInfo(UserID)
 );
 
+
+-- insert value
+INSERT INTO UserInfo (Name, Email, Password) VALUES
+  ('John Doe', 'abc@example.com', 'iit123'),
+  ('Jane Smith', 'def@example.com', 'iit123'),
+  ('Mike Johnson', 'ghi@example.com', 'iit123');
+
+INSERT INTO PostInfo (UserID, Text, Image, PostTime) VALUES
+  (1, 'This is my first post.', 'a.png', '2023-07-11 10:00:00'),
+  (1, 'Excited to share my latest project!', 'b.png', '2023-07-11 12:30:00'),
+  (3, 'Hello everyone!', NULL, '2023-07-11 15:45:00');
+
+-- password: password
+-- user : sakib
+-- host: localhost
