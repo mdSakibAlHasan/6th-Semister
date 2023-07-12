@@ -1,5 +1,6 @@
 import { React, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 // import { AuthContext } from "../compute/authContex";
 // import Navbar from "../Components/Navbar.js";
 
@@ -8,6 +9,7 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const [err, setErr] = useState();
   const navigate  = useNavigate();
   //const [err, setError] = useState(null);
 
@@ -20,6 +22,12 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     console.log(input," are here ");
+    try{
+      await axios.post("http://localhost:3001/app/login", input);
+      navigate("/newsFeed");
+    }catch(err){
+      setErr(err)
+    }
     navigate('/newsFeed');
   };
 
