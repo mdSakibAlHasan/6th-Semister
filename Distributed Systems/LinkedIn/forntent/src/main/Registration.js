@@ -1,18 +1,34 @@
 import { React, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Registration() {
   const [input, setInput] = useState({
     email: "",
-    namw: "",
+    name: "",
     password: "",
   });
+  const [err, setError] = useState();
   
   const handleChange = (e) => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
-    console.log(input," are here ");
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("http://localhost:3001/app/register", input);
+
+      if (response.data.message === "User registered successfully.") {
+        navigate("/newsFeed");
+      } else {
+        setError(response.data.message);
+      }
+    } catch (err) {
+      setError("Email already exists");
+    }
   };
 
   return (
@@ -68,7 +84,7 @@ export default function Registration() {
           <hr />
           <br />
           <center>
-            {/* {err && <p>{err}</p>} */}
+            {err && <div style={{ color: 'red' }}>{err}</div>}
             <button onClick={handleSubmit}>Register</button>
           </center>
         </div>

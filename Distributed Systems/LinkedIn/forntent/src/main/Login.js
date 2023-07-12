@@ -1,38 +1,38 @@
 import { React, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-// import { AuthContext } from "../compute/authContex";
-// import Navbar from "../Components/Navbar.js";
+
 
 export default function Login() {
   const [input, setInput] = useState({
     email: "",
     password: "",
   });
-  const [err, setErr] = useState();
   const navigate  = useNavigate();
-  //const [err, setError] = useState(null);
-
-//   const navigate = useNavigate();
-//   const { login } = useContext(AuthContext);
+  const [err, setError] = useState(null);
 
   const handleChange = (e) => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e) => {
-    console.log(input," are here ");
-    try{
-      await axios.post("http://localhost:3001/app/login", input);
-      navigate("/newsFeed");
-    }catch(err){
-      setErr(err)
+    e.preventDefault(); 
+
+    try {
+      const response = await axios.post("http://localhost:3001/app/login", input);
+      const { message } = response.data;
+
+      if (message === "Login successful") {
+        navigate("/newsFeed");
+      } else {
+        setError("Invalid email or password");
+      }
+    } catch (err) {
+      setError("Invalid email or password");
     }
-    navigate('/newsFeed');
   };
 
   return (
-    // <form action="">
       <div className="full_page_normal p-5 shade1">
         <div className="shade2 p-5 rounded">
           <center>
@@ -71,7 +71,7 @@ export default function Login() {
           <hr />
           <br />
           <center>
-            {/* {err && <p>{err}</p>} */}
+            {err && <div style={{ color: 'red' }}>{err}</div>}
             <p>Don't have account <Link to="/registration">Register</Link> </p>
             <button onClick={handleSubmit}>Enter</button>
           </center>
