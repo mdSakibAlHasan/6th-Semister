@@ -1,4 +1,5 @@
 import { db } from "../db.js";
+import jwt from "jsonwebtoken";
 
 export const login = (req, res) => {
   const { email, password } = req.body;
@@ -20,7 +21,12 @@ export const login = (req, res) => {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
     else{
-      return res.status(200).json({ message: 'Login successful' });
+      const { UserID } = results[0];
+      const token = jwt.sign({ UserID: UserID }, "jwtkey",{ expiresIn: '1h' });
+      res.status(200).json(token);
+      // res.cookie('authCookieName', 'cookieValue', );
+      // res.send('Login successful');
+      //return res.status(200).json({ message: 'Login successful' });
     }  
   });
 };

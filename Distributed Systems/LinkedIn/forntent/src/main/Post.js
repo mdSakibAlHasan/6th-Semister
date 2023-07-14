@@ -1,10 +1,24 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 export default function Post() {
   const [postText, setPostText] = useState("");
   const [photo, setPhoto] = useState(null);
+  const [myCookie, setMyCookie] = useState("");
+  const navigate  = useNavigate();
+
+  useEffect(() => {
+    function handleCookie() {
+      const cookie = Cookies.get('my_cookies');
+      setMyCookie(cookie);
+      if (cookie == null) {
+        navigate("/login");
+      }
+    }
+    handleCookie();
+  }, [navigate]);
 
   const handleTextChange = (event) => {
     setPostText(event.target.value);
@@ -17,14 +31,15 @@ export default function Post() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    console.log(myCookie);
     const formData = new FormData();
     formData.append("text", postText|| "");
     formData.append("file", photo);
+    formData.append("cookie",myCookie);
     console.log(formData,photo,postText);
 
     try {
-      const response = await axios.post("http://localhost:3001/app/post2", formData, {
+      const response = await axios.post("http://localhost:3001/app/post", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

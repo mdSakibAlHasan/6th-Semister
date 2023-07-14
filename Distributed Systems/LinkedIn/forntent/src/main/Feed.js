@@ -1,6 +1,7 @@
 import { React} from "react";
 import FeedCard from "./FeedCard";
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 
 export default function Feed() {
     const data=[
@@ -10,6 +11,9 @@ export default function Feed() {
         {name:"সাকিব আল হাসান", time:"Tomorrow", story:"One day, a dog was wandering around in the desert, searching for food. It was so hungry that it started to chew on a dry bone. As it chewed, it discovered that there was still some meat left on the bone. The dog had been patient and had been rewarded for its patience. This story teaches us about the importance of patience and perseverance.",pic:"picture/d.png"},
         {name:"Niazamum Mahmud", time:"Tomorrow", story:"When the Prophet Muhammad (peace be upon him) was hiding in a cave from his enemies, a spider spun a web over the entrance to the cave. When the enemies came to the cave, they saw the spider web and assumed that nobody could have entered the cave recently. This story teaches us about the importance of using whatever resources we have to protect ourselves and our loved ones.",pic:"picture/a.png"}
     ]
+    const myCookie = Cookies.get('my_cookies');
+    console.log(myCookie," is the cookies");
+
   return (
     <div>
     

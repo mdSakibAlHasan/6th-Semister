@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Cookies from 'js-cookie';
 
 
 export default function Login() {
@@ -20,17 +21,13 @@ export default function Login() {
 
     try {
       const response = await axios.post("http://localhost:3001/app/login", input);
-      const { message } = response.data;
-
-      if (message === "Login successful") {
-        navigate("/newsFeed");
-      } else {
-        setError("Invalid email or password");
-      }
+      //console.log(response);
+      Cookies.set('my_cookies', response.data, { expires: 1 });
+      navigate("/newsFeed");
     } catch (err) {
       setError("Invalid email or password");
     }
-  };
+  }
 
   return (
       <div className="full_page_normal p-5 shade1">
