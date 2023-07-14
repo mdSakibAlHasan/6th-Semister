@@ -12,6 +12,19 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
+
+function getCurrentTimestamp() {
+  const now = new Date();
+  const day = String(now.getDate()).padStart(2, '0');
+  const month = String(now.getMonth() + 1).padStart(2, '0'); // Note: Months are zero-based
+  const year = now.getFullYear();
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+
 export const setPostInfo = async (req, res, next) => {
     try {
       upload.single("file")(req, res, (err) => {
@@ -26,12 +39,22 @@ export const setPostInfo = async (req, res, next) => {
           return res.status(500).json({ error: "Internal server error" });
         }
         const path =(req.file && req.file.filename);
+        const time = getCurrentTimestamp();
         //console.log(req.file,"///////",path,"==========",text,"======",cookie);
         Jwt.verify(cookie, "jwtkey", (err, userInfo) => {
           if(err){
-
+            return res.status(401).json("Not authenticated!");
           }
           console.log("UserInfo: ",userInfo.UserID);
+          const query = 'INSERT INTO PostInfo (UserID, Text, Image, PostTime) VALUES (?, ?, ?, ?)';
+          db.query(query, [userInfo.UserID, text, path, time], (err, results) => {
+            if (err) {
+              console.error('Error storing variables in the database:', err);
+              return res.status(402).json("Internal server error");;
+            }
+
+            console.log('Variables stored in the database:', results);
+          });
         })
       });
     } catch (error) {
