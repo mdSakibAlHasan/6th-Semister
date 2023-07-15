@@ -1,5 +1,14 @@
 import { React } from "react";
 
+useEffect(() => {
+    const handlImage = async () => {
+      import(`./photo/${photo}`)
+        .then((image) => setImageSrc(image.default))
+        .catch((error) => console.error(error, "occur here"));
+    };
+    handlImage();
+  }, [ID]);
+
 export default function FeedCard(props) {
     return (
         <>

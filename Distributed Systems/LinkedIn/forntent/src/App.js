@@ -4,6 +4,7 @@ import Login from "./main/Login.js";
 import Registration from "./main/Registration.js";
 import Feed from "./main/Feed.js";
 import Post from "./main/Post.js";
+import './App.css';
 
 const router = createBrowserRouter([
   {

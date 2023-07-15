@@ -1,0 +1,71 @@
+.my_body{
+    /* font-family: , Arial, sans-serif !important; */
+    font-family: Noto Sans,sans-serif,'CharukolaUltraLight';
+    color: white;
+}
+
+.shade2{
+    background-color: #eceff3;
+}
+.shade1{
+    background-color: #d6e4f5;
+}
+.shade3{
+    background-color: #204b83;
+}
+.shade4{
+    background-color: #20539525;
+}
+
+a{
+    color: white;
+}
+
+a:hover{
+    text-decoration: dashed;
+    color: aquamarine;
+    /* font-size: larger; */
+}
+.my-nav-link{
+    text-decoration: none;
+
+}
+
+a.hover{
+    color:rgb(255, 127, 195)
+}
+
+.full_page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .full_page_short {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:90vh;
+  }
+  .full_page_height {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 150vh; */
+  }
+
+input,select{
+    background: transparent;
+    border: 1px solid #205295;
+    color: white;
+    width: 100%;
+    /* border-style: dashed; */
+}
+
+textarea{
+    background: transparent;
+    /* border: transparent; */
+    border: 1px solid #205295;
+    color: white;
+    width: 100%;
+}

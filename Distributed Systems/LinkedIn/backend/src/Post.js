@@ -50,7 +50,7 @@ export const setPostInfo = async (req, res, next) => {
           db.query(query, [userInfo.UserID, text, path, time], (err, results) => {
             if (err) {
               console.error('Error storing variables in the database:', err);
-              return res.status(402).json("Internal server error");;
+              return res.status(500).json("Internal server error");;
             }
 
             console.log('Variables stored in the database:', results);
