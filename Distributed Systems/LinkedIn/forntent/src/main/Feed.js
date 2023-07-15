@@ -1,4 +1,4 @@
-import { React, useEffect} from "react";
+import { React, useEffect, useState} from "react";
 import FeedCard from "./FeedCard";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
@@ -13,6 +13,7 @@ export default function Feed() {
         {name:"Niazamum Mahmud", time:"Tomorrow", story:"When the Prophet Muhammad (peace be upon him) was hiding in a cave from his enemies, a spider spun a web over the entrance to the cave. When the enemies came to the cave, they saw the spider web and assumed that nobody could have entered the cave recently. This story teaches us about the importance of using whatever resources we have to protect ourselves and our loved ones.",pic:null}
     ]
     const navigate = useNavigate();
+    const [postInfo, setPostInfo] = useState([]);
 
     useEffect(() => {
       const handleInfo = async () =>  {
@@ -29,9 +30,7 @@ export default function Feed() {
                 withCredentials: true
               }
             );
-            
-            // Handle the response here
-            console.log(result.data,"======================================");
+            setPostInfo(result.data);
           } catch (error) {
             // Handle errors here
             console.error(error);
@@ -39,7 +38,7 @@ export default function Feed() {
         }
       }
       handleInfo();
-    }, [navigate]);
+    }, []);
     
 
   return (
@@ -47,7 +46,7 @@ export default function Feed() {
     
     <h3><Link to="/post">Post</Link></h3>
     <div className='shade1 p-3 full_page_height' style={{ display: "inline-block" }}>
-        {data.map((feed)=><FeedCard name={feed.name} time={feed.time} story={feed.story} picture={feed.pic}/>)}
+        {postInfo.map((feed)=><FeedCard name={feed.Name} time={feed.PostTime} story={feed.Text} picture={feed.Image}/>)}
     </div>
     </div>
   )

@@ -13,7 +13,7 @@ export const getPostInfo = async (req, res, next) => {
             return res.status(401).json("Not authenticated!");
         }
         console.log("UserInfo: ",userInfo.UserID);
-        const query = 'select * from PostInfo where UserID <> ?;';
+        const query = 'SELECT PostID, UserInfo.UserID, Text, Image, PostTime, Name  FROM UserInfo JOIN PostInfo ON PostInfo.UserID = UserInfo.UserID where PostInfo.UserID <> ?;';
         db.query(query, [userInfo.UserID], (err, results) => {
             if (err) {
                 console.error('Error get information from database:', err);
