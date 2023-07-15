@@ -21,7 +21,7 @@ export const getPostInfo = async (req, res, next) => {
             }
 
             console.log(results);
-            res.status(200).send(results);
+            return res.status(200).send(results);
         });
     })
     }
