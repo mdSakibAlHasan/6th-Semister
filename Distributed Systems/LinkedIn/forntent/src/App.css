@@ -18,7 +18,7 @@
 }
 
 a{
-    color: white;
+    color: rgb(12, 9, 9);
 }
 
 a:hover{
@@ -57,7 +57,7 @@ a.hover{
 input,select{
     background: transparent;
     border: 1px solid #205295;
-    color: white;
+    color: rgb(17, 2, 2);
     width: 100%;
     /* border-style: dashed; */
 }
@@ -66,6 +66,6 @@ textarea{
     background: transparent;
     /* border: transparent; */
     border: 1px solid #205295;
-    color: white;
+    color: rgb(53, 7, 7);
     width: 100%;
 }

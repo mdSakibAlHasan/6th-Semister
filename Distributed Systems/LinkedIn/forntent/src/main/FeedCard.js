@@ -7,15 +7,16 @@ export default function FeedCard(props) {
 
   useEffect(() => {
     const handleImage = async () => {
+      console.log(props.picture)
       try {
-        const imagePath = `./media/sakib/IIT/6th Semister/6th-Semister/Distributed Systems/LinkedIn/backend/src/uploads/${props.picture}`;
+        const imagePath = `/media/sakib/IIT/6th Semister/6th-Semister/Distributed Systems/LinkedIn/backend/src/uploads/${props.picture}`;
         const image = await import(imagePath);
         const imageSource = image.default;
         setImgSrc(imageSource);
       } catch (error) {
         console.error("Error occurred while importing image:", error);
       }
-    };
+    };///media/sakib/IIT/6th Semister/6th-Semister/Distributed Systems/LinkedIn/backend/uploads/1689185581645-Sakib Al Hasan.png
   
     handleImage();
   }, [props.picture]);

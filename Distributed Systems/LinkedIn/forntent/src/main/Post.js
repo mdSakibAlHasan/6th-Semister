@@ -7,6 +7,7 @@ export default function Post() {
   const [postText, setPostText] = useState("");
   const [photo, setPhoto] = useState(null);
   const [myCookie, setMyCookie] = useState("");
+  const [postImag, setPostImage] = useState(null);
   const navigate  = useNavigate();
 
   useEffect(() => {
@@ -27,6 +28,8 @@ export default function Post() {
   const handleImageChange = (event) => {
     const imageFile = event.target.files[0];
     setPhoto(imageFile);
+    //const imageFile = event.target.files[0];
+    setPostImage(URL.createObjectURL(imageFile));
   };
 
   const handleSubmit = async (event) => {
@@ -52,7 +55,8 @@ export default function Post() {
   };
 
   return (
-    <div>
+    <div className="full_page_normal p-5 shade1">
+      <div className="shade2 p-5 rounded">
       <center>
         <h1>LinkedIn</h1>
         <br />
@@ -63,7 +67,7 @@ export default function Post() {
 
         <div>
           <h4>Create a Post</h4>
-          <textarea
+          <textarea className="p-3"
             value={postText}
             onChange={handleTextChange}
             placeholder="Write your post..."
@@ -71,10 +75,18 @@ export default function Post() {
           <br />
           <input type="file" onChange={handleImageChange} />
           <br />
-          <button onClick={handleSubmit}>Submit</button>
+          {postImag && <img src={postImag} alt="Image upload fail" height={400} width={400}/>}
+          <br/>
+          <input
+              className="btn btn-outline-light"
+              type="button"
+              value="Post"
+              onClick={handleSubmit}
+            />
         </div>
         <hr />
       </center>
+      </div>
     </div>
   );
 }
