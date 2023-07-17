@@ -1,5 +1,4 @@
 import { React, useEffect, useState} from "react";
-import FeedCard from "./FeedCard";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import axios from "axios";
@@ -37,12 +36,25 @@ export default function Notification() {
 
   return (
     <div className="full_page_normal p-5 shade1">
-        <div className="shade2 p-5 rounded">
+        <div className="shade2 p-5 rounded style={{ width: '80%' }}">
     <h3><Link to="/post">Post</Link></h3>
     <div className='shade1 p-3 full_page_height' style={{ display: "inline-block" }}>
-        {postInfo.map((feed)=><FeedCard name={feed.Name} time={feed.PostTime} story={feed.Text} picture={feed.Image}/>)}
+        {postInfo.map((feed)=><NotificationCard name={feed.Name} time={feed.PostTime}/>)}
     </div>
     </div>
     </div>
   )
 };
+
+function NotificationCard(props){
+    return (
+        <>
+        <div>
+      <button style={{ width: '80%' }}>
+        <div className="display-6 p-2">{props.name}</div>
+      </button>
+      <hr />
+    </div>
+        </>
+      )
+}
