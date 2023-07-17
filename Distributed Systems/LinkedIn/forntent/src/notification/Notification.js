@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import axios from "axios";
 
-export default function Feed() {
+export default function Notification() {
     const navigate = useNavigate();
     const [postInfo, setPostInfo] = useState([]);
 
