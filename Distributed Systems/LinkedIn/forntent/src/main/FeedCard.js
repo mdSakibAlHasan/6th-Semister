@@ -1,38 +1,44 @@
-import { React, useEffect} from "react";
-import { useState } from "react";
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function FeedCard(props) {
   const [imgsrc, setImgSrc] = useState("");
 
   useEffect(() => {
-    const handleImage = async () => {
-      console.log(props.picture)
+    const fetchImage = async () => {
       try {
-        const imagePath = `/media/sakib/IIT/6th Semister/6th-Semister/Distributed Systems/LinkedIn/backend/uploads/1689185581645-Sakib Al Hasan.png`;
-        const image = await import(imagePath);
-        const imageSource = image.default;
-        setImgSrc(imageSource);
-      } catch (error) {
-        console.error("Error occurred while importing image:", error);
-      }
-    };///media/sakib/IIT/6th Semister/6th-Semister/Distributed Systems/LinkedIn/backend/uploads/1689185581645-Sakib Al Hasan.png
-  
-    handleImage();
-  }, [props.picture]);
-  
+        const response = await axios.get('http://localhost:3001/app/photo', {
+          params: {
+            image: props.picture,   
+          },
+          responseType: 'blob', // Set the responseType to 'blob' to get the image as a Blob object
+        });
 
-    return (
-        <>
-        <div className='shade2 p-2 m-2 display-block'>
-            <div className="row">
-                <div className="display-6">{props.name}</div>
-                <div ><small>{props.time}</small></div> <hr/>
-                <div >{props.story}</div> <hr/>
-                <div >{props.picture && <img src = {imgsrc}  alt="image not found"/> } </div>
-            </div>    
+        const reader = new FileReader();
+        reader.onloadend = () => {
+        setImgSrc(reader.result);
+        };
+        reader.readAsDataURL(response.data); // Convert the Blob to base64 using FileReader
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchImage();
+  }, []);
+
+  return (
+    <>
+      <div className='shade2 p-2 m-2 display-block'>
+        <div className="row">
+          <div className="display-6">{props.name}</div>
+          <div><small>{props.time}</small></div> <hr />
+          <div>{props.story}</div> <hr />
+          {imgsrc && <img src={imgsrc} alt="Photo" />} {/* Display the image */}
+          <hr />
         </div>
-        <br/>
-        </>
-      )
+      </div>
+      <br />
+    </>
+  );
 }
