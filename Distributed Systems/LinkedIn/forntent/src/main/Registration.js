@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
 export default function Registration() {
@@ -84,6 +84,7 @@ export default function Registration() {
           <hr />
           <br />
           <center>
+            <p>Already have account <Link to="/login">login</Link></p>
             {err && <div style={{ color: 'red' }}>{err}</div>}
             <button onClick={handleSubmit}>Register</button>
           </center>

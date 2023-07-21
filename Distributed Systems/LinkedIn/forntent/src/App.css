@@ -69,3 +69,33 @@ textarea{
     color: rgb(53, 7, 7);
     width: 100%;
 }
+
+/* Navbar.css */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f0f0f0;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  .navbar-logo a {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .navbar-buttons a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .navbar-buttons a:hover {
+    color: #007bff;
+  }
+  

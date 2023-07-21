@@ -22,15 +22,16 @@ export default function Login() {
     try {
       const response = await axios.post("http://localhost:3001/app/login", input);
       //console.log(response);
-      Cookies.set('my_cookies', response.data, { expires: 1 });
+      Cookies.set('my_cookies', response.data, { expires: 12 });
       navigate("/newsFeed");
     } catch (err) {
       setError("Invalid email or password");
     }
   }
 
-  return (
+  return (  
       <div className="full_page_normal p-5 shade1">
+       
         <div className="shade2 p-5 rounded">
           <center>
             <h4>
