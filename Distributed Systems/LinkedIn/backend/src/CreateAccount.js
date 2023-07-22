@@ -1,4 +1,5 @@
 import { db } from "../db.js";
+import bcrypt from "bcryptjs";
 
 export const CreateAccount = (req, res) => {
   const { name, email, password } = req.body;
@@ -6,6 +7,9 @@ export const CreateAccount = (req, res) => {
   if (!name || !email || !password) {
     return res.status(400).json({ message: "Please provide all required fields." });
   }
+
+  const salt = bcrypt.genSaltSync(10);
+  const pass = bcrypt.hashSync(password, salt);
 
   db.query("SELECT * FROM UserInfo WHERE Email = ?", [email], (error, results) => {
     if (error) {
@@ -18,7 +22,7 @@ export const CreateAccount = (req, res) => {
     else{
       db.query(
         "INSERT INTO UserInfo (Name, Email, Password) VALUES (?, ?, ?)",
-        [name, email, password],
+        [name, email, pass],
         (error, results) => {
           if (error) {
             console.log(error);

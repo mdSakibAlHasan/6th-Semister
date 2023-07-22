@@ -40,15 +40,17 @@ export const getPostInfo = async (req, res, next) => {
 export const getPhoto = async(req,res) =>{
     const { image} = req.query;
 
-  const currentFilePath = fileURLToPath(import.meta.url);
-  console.log(currentFilePath," cF ")
-  const currentDirPath = dirname(currentFilePath);
-  console.log(currentDirPath," cD")
-  const sourceDirPath = path.join(currentDirPath, '../uploads');
-  const imagePath = path.join(sourceDirPath, image);
+    if(image!==undefined){
+        const currentFilePath = fileURLToPath(import.meta.url);
+        //console.log(currentFilePath," cF ")
+        const currentDirPath = dirname(currentFilePath);
+        //console.log(currentDirPath," cD")
+        const sourceDirPath = path.join(currentDirPath, '../uploads');
+        const imagePath = path.join(sourceDirPath, image);
+        
+        //console.log(imagePath);
+        res.sendFile(imagePath);
+    }
   
-
-  console.log(imagePath);
-  res.sendFile(imagePath);
     
 }

@@ -22,8 +22,8 @@ export default function Login() {
     try {
       const response = await axios.post("http://localhost:3001/app/login", input);
       //console.log(response);
-      Cookies.set('my_cookies', response.data, { expires: 12 });
-      navigate("/newsFeed");
+      Cookies.set('my_cookies', response.data, { expires: 0.5 });
+      navigate("/home");
     } catch (err) {
       setError("Invalid email or password");
     }

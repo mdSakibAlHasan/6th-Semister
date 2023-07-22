@@ -61,13 +61,8 @@ export default function Post() {
     <div className="full_page_normal p-5 shade1">
       <div className="shade2 p-5 rounded">
       <center>
-        <h1>LinkedIn</h1>
+        <h1>Post in your timeline</h1>
         <br />
-        <h3>
-          <Link to="/newsFeed">Home</Link>
-        </h3>
-        <h2>Your timeline</h2>
-
         <div>
           <h4>Create a Post</h4>
           <textarea className="p-3"

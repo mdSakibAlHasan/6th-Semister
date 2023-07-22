@@ -1,17 +1,21 @@
 import { db } from "../db.js";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
 
 export const login = (req, res) => {
   const { email, password } = req.body;
 
-  console.log(email,"------------",password);
+  //console.log(email,"------------",password);
 
   if (!email || !password) {
     return res.status(400).json({ message: 'Email and password are required' });
   }
 
+  const salt = bcrypt.genSaltSync(10);
+  const pass = bcrypt.hashSync(password, salt);
+
   const query = 'SELECT * FROM UserInfo WHERE Email = ? AND Password = ?';
-  db.query(query, [email, password], (err, results) => {
+  db.query(query, [email, pass], (err, results) => {
     if (err) {
       console.error(err);
       return res.status(500).json({ message: 'Internal server error' });
@@ -22,11 +26,8 @@ export const login = (req, res) => {
     }
     else{
       const { UserID } = results[0];
-      const token = jwt.sign({ UserID: UserID }, "jwtkey",{ expiresIn: '1h' });
+      const token = jwt.sign({ UserID: UserID }, "jwtkey",{ expiresIn: '12h' });
       res.status(200).json(token);
-      // res.cookie('authCookieName', 'cookieValue', );
-      // res.send('Login successful');
-      //return res.status(200).json({ message: 'Login successful' });
     }  
   });
 };

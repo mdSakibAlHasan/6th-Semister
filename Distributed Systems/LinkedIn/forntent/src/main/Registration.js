@@ -22,7 +22,7 @@ export default function Registration() {
       const response = await axios.post("http://localhost:3001/app/register", input);
 
       if (response.data.message === "User registered successfully.") {
-        navigate("/newsFeed");
+        navigate("/home");
       } else {
         setError(response.data.message);
       }
