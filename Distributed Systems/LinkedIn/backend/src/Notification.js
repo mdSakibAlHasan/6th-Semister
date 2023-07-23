@@ -1,5 +1,5 @@
 import { db } from "../db.js";
-
+import  Jwt  from "jsonwebtoken";
 
 export const getNotification = async (req, res, next) => {
     try{
@@ -13,11 +13,15 @@ export const getNotification = async (req, res, next) => {
             return res.status(401).json("Not authenticated!");
         }
         console.log("UserInfo: ",userInfo.UserID);
-        const query = 'SELECT Notification FROM UserInfo where UserID = ?;';
+        const query = `SELECT u.Name, p.PostID, p.PostTime
+        FROM UserInfo u
+        JOIN Notification n ON u.UserID = n.UserID
+        JOIN PostInfo p ON n.PostID = p.PostID
+        WHERE n.Status = TRUE AND u.UserID <> ?;`;
         db.query(query, [userInfo.UserID], (err, results) => {
             if (err) {
                 console.error('Error get information from database:', err);
-                return res.status(500).json("Internal server error");;
+                return res.status(500).json("Internal server error");
             }
 
             console.log(results);

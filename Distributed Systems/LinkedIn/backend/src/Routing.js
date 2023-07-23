@@ -4,6 +4,7 @@ import { login } from './Login.js';
 import { CreateAccount } from './CreateAccount.js';
 import { setPostInfo } from './Post.js';
 import { getPostInfo, getPhoto } from './Feed.js';
+import { getNotification } from './Notification.js';
 
 const router = express.Router();
 
@@ -12,6 +13,7 @@ router.post('/register',CreateAccount);
 router.post('/post',setPostInfo);
 router.get('/news',getPostInfo);
 router.get('/photo',getPhoto);
+router.get('/notification',getNotification);
 
 
 export default router;

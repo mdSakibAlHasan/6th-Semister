@@ -2,6 +2,7 @@ import { React, useEffect, useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import axios from "axios";
+import Navbar from "../main/Navbar.js";
 
 export default function Notification() {
     const navigate = useNavigate();
@@ -17,12 +18,13 @@ export default function Notification() {
           console.log(cookie);
           try {
             const result = await axios.get(
-              "http://localhost:3001/app/news",
+              "http://localhost:3001/app/notification",
               {
                 withCredentials: true
               }
             );
             setPostInfo(result.data);
+            console.log(result.data);
           } catch (error) {
             // Handle errors here
             console.error(error);
@@ -35,13 +37,19 @@ export default function Notification() {
     
 
   return (
-    <div className="full_page_normal p-5 shade1">
-        <div className="shade2 p-5 rounded style={{ width: '80%' }}">
-    <h3><Link to="/post">Post</Link></h3>
-    <div className='shade1 p-3 full_page_height' style={{ display: "inline-block" }}>
-        {postInfo.map((feed)=><NotificationCard name={feed.Name} time={feed.PostTime}/>)}
-    </div>
-    </div>
+    <div>
+      <Navbar />
+      <div className="full_page_normal p-5 shade1">
+      <center>
+        <div className="shade2 p-5 rounded style={{ width: '80%' }}">   
+        <h2>Notification</h2>
+        <br/><hr/><br/>
+        <div className='shade1 p-3 full_page_height' style={{ display: "inline-block" }}>
+            {postInfo.map((feed)=><NotificationCard name={feed.Name} postID={feed.PostID} time={feed.PostTime}/>)}
+        </div>
+        </div>
+        </center>
+      </div>
     </div>
   )
 };
@@ -49,9 +57,10 @@ export default function Notification() {
 function NotificationCard(props){
     return (
         <>
-        <div>
+        <div style={{width: '100%'}}>
       <button style={{ width: '80%' }}>
-        <div className="display-6 p-2">{props.name}</div>
+        <b>{props.name} </b>
+        posted a post on {props.time}
       </button>
       <hr />
     </div>
