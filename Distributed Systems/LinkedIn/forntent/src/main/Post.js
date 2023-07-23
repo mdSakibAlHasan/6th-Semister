@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
 import Navbar from "./Navbar.js";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Post() {
   const [postText, setPostText] = useState("");
@@ -50,6 +52,11 @@ export default function Post() {
       });
 
       console.log(response.data);
+      toast.success('Post Successful', {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 2000, // The message will automatically close after 2 seconds
+        hideProgressBar: true,
+      });
     } catch (error) {
       console.error(error);
     }
