@@ -8,7 +8,8 @@ CREATE TABLE UserInfo (
   UserID INT AUTO_INCREMENT PRIMARY KEY,
   Name VARCHAR(255),
   Email VARCHAR(255),
-  Password VARCHAR(255)
+  Password VARCHAR(255),
+  Notification VARCHAR(255)
 );
 
 -- Create the PostInfo table
@@ -24,9 +25,9 @@ CREATE TABLE PostInfo (
 
 -- insert value
 INSERT INTO UserInfo (Name, Email, Password) VALUES
-  ('John Doe', 'abc@example.com', 'iit123'),
-  ('Jane Smith', 'def@example.com', 'iit123'),
-  ('Mike Johnson', 'ghi@example.com', 'iit123');
+  ('John Doe', 'abc@example.com', 'iit123','1,2,3'),
+  ('Jane Smith', 'def@example.com', 'iit123','1,2,3'),
+  ('Mike Johnson', 'ghi@example.com', 'iit123','1,2,3');
 
 INSERT INTO PostInfo (UserID, Text, Image, PostTime) VALUES
   (1, 'This is my first post.', 'a.png', '2023-07-11 10:00:00'),
@@ -36,3 +37,5 @@ INSERT INTO PostInfo (UserID, Text, Image, PostTime) VALUES
 -- password: password
 -- user : sakib
 -- host: localhost
+-- Kog2dOivleEhnlFPYmzh
+-- dcG78bx6QVHvQp6t86xLFG17opojk6xSseJ5tdwX

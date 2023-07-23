@@ -5,17 +5,17 @@ import bcrypt from "bcryptjs";
 export const login = (req, res) => {
   const { email, password } = req.body;
 
-  //console.log(email,"------------",password);
+  console.log(email,"------------",password);
 
   if (!email || !password) {
     return res.status(400).json({ message: 'Email and password are required' });
   }
 
-  const salt = bcrypt.genSaltSync(10);
-  const pass = bcrypt.hashSync(password, salt);
-
+  // const salt = bcrypt.genSaltSync(10);
+  // const pass = bcrypt.hashSync(password);
+  // console.log(pass,"=====");
   const query = 'SELECT * FROM UserInfo WHERE Email = ? AND Password = ?';
-  db.query(query, [email, pass], (err, results) => {
+  db.query(query, [email, password], (err, results) => {
     if (err) {
       console.error(err);
       return res.status(500).json({ message: 'Internal server error' });

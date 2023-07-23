@@ -8,8 +8,8 @@ export const CreateAccount = (req, res) => {
     return res.status(400).json({ message: "Please provide all required fields." });
   }
 
-  const salt = bcrypt.genSaltSync(10);
-  const pass = bcrypt.hashSync(password, salt);
+  // const salt = bcrypt.genSaltSync(10);
+  // const pass = bcrypt.hashSync(password, salt);
 
   db.query("SELECT * FROM UserInfo WHERE Email = ?", [email], (error, results) => {
     if (error) {

@@ -1,6 +1,17 @@
 import { db } from "../db.js";
 import multer from "multer";
 import  Jwt  from "jsonwebtoken";
+import { Client as Minio } from 'minio';
+
+
+export const minioClient = new Minio({
+  endPoint: 'localhost',
+  port: 9000,
+  useSSL: false,
+  accessKey: 'Kog2dOivleEhnlFPYmzh',
+  secretKey: 'dcG78bx6QVHvQp6t86xLFG17opojk6xSseJ5tdwX',
+});
+
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -45,6 +56,8 @@ export const setPostInfo = async (req, res, next) => {
           if(err){
             return res.status(401).json("Not authenticated!");
           }
+          
+
           console.log("UserInfo: ",userInfo.UserID);
           const query = 'INSERT INTO PostInfo (UserID, Text, Image, PostTime) VALUES (?, ?, ?, ?)';
           db.query(query, [userInfo.UserID, text, path, time], (err, results) => {
