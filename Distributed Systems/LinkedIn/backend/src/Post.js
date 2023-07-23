@@ -82,7 +82,8 @@ export const setPostInfo =  (req, res, next) => {
                   return res.status(500).json("Internal server error");;
                 }
 
-                console.log('Variables stored in the database:', results);
+                console.log('Variables stored in the database:', results.insertId);
+                NotificationUpdate(results.insertId,userInfo.UserID);
               });
             }); 
           }
@@ -94,7 +95,8 @@ export const setPostInfo =  (req, res, next) => {
                 return res.status(500).json("Internal server error");;
               }
 
-              console.log('Variables stored in the database:', results);
+              console.log('Variables stored in the database:', results.insertId);
+              NotificationUpdate(results.insertId,userInfo.UserID);
             });
           } 
         })
@@ -104,3 +106,19 @@ export const setPostInfo =  (req, res, next) => {
       res.status(500).json({ error: "Internal server error" });
     }
   };
+
+
+  const NotificationUpdate = (PostID, UserID) =>{
+    db.query(
+      "INSERT INTO Notification (PostID, UserID, Status) select ?, UserID, 1 from UserInfo where UserID <> ?;",
+      [PostID, UserID],
+      (error, results) => {
+        if (error) {
+          console.log(error);
+          console.log("Database querey problem ")
+        }
+
+        console.log("Successfull update ")
+      }
+    );
+  }

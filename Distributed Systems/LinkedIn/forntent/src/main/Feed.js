@@ -25,6 +25,7 @@ export default function Feed() {
               }
             );
             setPostInfo(result.data);
+            console.log(result.data);
           } catch (error) {
             // Handle errors here
             console.error(error);
