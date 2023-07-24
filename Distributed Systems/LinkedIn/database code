@@ -29,6 +29,9 @@ CREATE TABLE Notification (
   FOREIGN KEY (PostID) REFERENCES PostInfo(PostID),
   FOREIGN KEY (UserID) REFERENCES UserInfo(UserID)
 );
+-- select Notification.PostID, UserInfo.Name, PostInfo.PostTime from Notification, PostInfo, UserInfo where Notification.PostID = PostInfo.PostID and
+-- PostInfo.UserID = UserInfo.UserID
+-- and Notification.UserID = 3 and Notification.Status = true;
 
 
 -- insert value
