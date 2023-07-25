@@ -13,7 +13,7 @@ export const getNotification = async (req, res, next) => {
             return res.status(401).json("Not authenticated!");
         }
         console.log("UserInfo: ",userInfo.UserID);
-        const query = `select Notification.PostID, UserInfo.Name, PostInfo.PostTime, PostInfo.Image, PostInfo.Text from Notification, PostInfo, UserInfo 
+        const query = `select Notification.PostID,Notification.UserID, UserInfo.Name, PostInfo.PostTime, PostInfo.Image, PostInfo.Text from Notification, PostInfo, UserInfo 
         where Notification.PostID = PostInfo.PostID and PostInfo.UserID = UserInfo.UserID
         and Notification.UserID = ? and Notification.Status = true;`;
         db.query(query, [userInfo.UserID], (err, results) => {
@@ -40,7 +40,7 @@ export const getNotification = async (req, res, next) => {
     // const cookie = req.headers.cookie;
     // const token = cookie.split("=")[1];
     // console.log(token);
-    const querey = `select * from PostInfo where PostID = ${PostID};`;
+    const querey = `update Notification set status=0 where PostID = ${PostID} and UserID = ${UserID};`;
     console.log(querey);
     db.query(querey,(err, result)=>{
         if(err){
@@ -49,28 +49,9 @@ export const getNotification = async (req, res, next) => {
         }
         else{
             console.log("COmplete querey",result);
-            res.status(200).send(result);
+            res.status(200).json("Complete notice");
         }
     })
   }
 
-  
-  export const getID = (req, res) => {
-    try {
-      const cookie = req.headers.cookie;
-      const token = cookie.split("=")[1];
-      console.log(token);
-  
-      Jwt.verify(token, "jwtkey", (err, userInfo) => {
-        if (err) {
-          console.log(err);
-          return res.status(401).json("Not authenticated!");
-        }
-        return res.send(userInfo.UserID);
-      });
-    } catch (err) {
-      console.log(err);
-      return res.status(500).json("Internal server error");
-    }
-  };
   

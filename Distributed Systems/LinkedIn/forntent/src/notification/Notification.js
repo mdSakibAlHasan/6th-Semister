@@ -24,10 +24,6 @@ export default function Notification() {
             withCredentials: true,
           });
           setPostInfo(result.data);
-          // const result2 = await axios.get("http://localhost:3001/app/getID", {
-          //   withCredentials: true,
-          // });
-          // console.log(result2);
         } catch (error) {
           // Handle errors here
           console.error(error);
@@ -38,9 +34,10 @@ export default function Notification() {
     handleInfo();
   }, []);
 
-  const handleNotificationClick = async (postID) => {
+  const handleNotificationClick = async (postID, UserID) => {
     const result = await axios.post("http://localhost:3001/app/getPostDetails", {
             PostID: postID,
+            UserID: UserID,
     });
     setPostDetails(result.data);
     setExpandedNotification((prevState) => (prevState === postID ? null : postID));
@@ -66,8 +63,9 @@ export default function Notification() {
                   time={feed.PostTime}
                   text={feed.Text}
                   image={feed.Image}
+                  userID={feed.UserID}
                   isExpanded={expandedNotification === feed.PostID}
-                  onClick={() => handleNotificationClick(feed.PostID)}
+                  onClick={() => handleNotificationClick(feed.PostID, feed.UserID)}
                 />
               ))}
             </div>
