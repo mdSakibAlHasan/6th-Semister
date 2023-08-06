@@ -37,9 +37,7 @@ export const getNotification = async (req, res, next) => {
   export const getPostDetails = (req,res) =>{
     const { PostID, UserID } = req.body;
     console.log(req.body);
-    // const cookie = req.headers.cookie;
-    // const token = cookie.split("=")[1];
-    // console.log(token);
+
     const querey = `update Notification set status=0 where PostID = ${PostID} and UserID = ${UserID};`;
     console.log(querey);
     db.query(querey,(err, result)=>{

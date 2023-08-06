@@ -94,7 +94,7 @@ function NotificationCard(props) {
           <>
             <div style={{ padding: '10px', background: '#f0f0f0', marginTop: '10px' }}>
               {/* Render the expanded details here */}
-              <p>Details of post with ID {props.text} go here...</p>
+              <p>Details of post: {props.text} </p>
               <img src={props.image} style={imageStyle}/>
             </div>
           </>

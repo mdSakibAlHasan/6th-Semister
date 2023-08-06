@@ -22,7 +22,7 @@ export const CreateAccount = (req, res) => {
     else{
       db.query(
         "INSERT INTO UserInfo (Name, Email, Password) VALUES (?, ?, ?)",
-        [name, email, pass],
+        [name, email, password],
         (error, results) => {
           if (error) {
             console.log(error);
