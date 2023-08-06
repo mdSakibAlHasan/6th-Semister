@@ -55,7 +55,7 @@ export const getNotification = async (req, res, next) => {
 
   export const NotificationCleaner = () =>{
     const currentTime = getCurrentTimestamp();
-    const querey = `DELETE FROM Notification WHERE PostID in (select PostID from PostInfo where TIMEDIFF('${currentTime}',PostTime)>'00:00:03' );`;
+    const querey = `DELETE FROM Notification WHERE PostID in (select PostID from PostInfo where TIMEDIFF('${currentTime}',PostTime)>'32:00:03' );`;
     console.log(querey);
     db.query(querey, (err, results) => {
       console.log(results,err);

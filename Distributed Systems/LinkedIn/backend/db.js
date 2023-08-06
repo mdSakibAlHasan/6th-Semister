@@ -1,27 +1,14 @@
-// import mysql from "mysql";
-
-// export const db = mysql.createConnection({
-//     host: "localhost",
-//     user: "sakib",
-//     password: "passsword",
-//     database: "likedin"
-// })
-
-// db.connect(function(err) {
-//     if (err) {
-//         console.log("problem");
-//         throw err;
-//     }
-       
-//     console.log("Connected!");
-// });
-//const mysql2 = require("mysql2");
 import mysql2 from 'mysql2';
+import dotenv from 'dotenv';
+
+// Load environment variables from .env file
+dotenv.config();
+
 
 export const db = mysql2.createConnection({
   host: "localhost",
   user: "sakib",
-  password: "password",
+  password: process.env.DB_PASSWORD,
   database: "likedin",
 });
 

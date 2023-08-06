@@ -3,14 +3,17 @@ import multer from "multer";
 import  Jwt  from "jsonwebtoken";
 import { Client as Minio } from 'minio';
 import fs from "fs";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 
 export const minioClient = new Minio({
   endPoint: 'localhost',
   port: 9000,
   useSSL: false,
-  accessKey: 'Kog2dOivleEhnlFPYmzh',
-  secretKey: 'dcG78bx6QVHvQp6t86xLFG17opojk6xSseJ5tdwX',
+  accessKey: process.env.MINIO_ACCESS_KEY,
+  secretKey: process.env.MINIO_SECRECT_KEY,
 });
 
 
