@@ -1,5 +1,6 @@
 import { db } from "../db.js";
 import  Jwt  from "jsonwebtoken";
+import { getCurrentTimestamp } from "./Post.js";
 
 export const getNotification = async (req, res, next) => {
     try{
@@ -53,5 +54,17 @@ export const getNotification = async (req, res, next) => {
         }
     })
   }
+
+  export const NotificationCleaner = () =>{
+    const currentTime = getCurrentTimestamp();
+    const querey = `DELETE FROM Notification WHERE PostID in (select PostID from PostInfo where TIMEDIFF('${currentTime}',PostTime)>'00:00:03' );`;
+    console.log(querey);
+    db.query(querey, (err, results) => {
+      console.log(results,err);
+    });
+  }
+
+  setInterval(NotificationCleaner,5000);
+
 
   
