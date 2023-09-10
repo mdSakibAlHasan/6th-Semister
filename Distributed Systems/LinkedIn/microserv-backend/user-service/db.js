@@ -6,8 +6,8 @@ dotenv.config();
 
 
 export const db = mysql2.createConnection({
-  host: "localhost",
-  user: "sakib",
+  host: "mysql",
+  user: "root",
   password: process.env.DB_PASSWORD,
   database: "likedin",
 });
