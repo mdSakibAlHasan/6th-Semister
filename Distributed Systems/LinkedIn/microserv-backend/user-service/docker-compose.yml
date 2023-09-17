@@ -21,7 +21,15 @@ services:
     restart: unless-stopped
     networks:
       - internalnet
+    ports:
+    - "3005:3005"
 
+  # browser:
+  #   image: likedin
+  #   build: .
+  #   restart: unless-stopped
+  #   networks:
+  #     - internalnet
 
 networks:
   internalnet:
