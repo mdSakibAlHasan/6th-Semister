@@ -9,8 +9,8 @@ import { dirname } from 'path';
 export const getPostInfo = async (req, res, next) => {
     try{
     const cookie = req.headers.cookie;
-    const token = cookie.split("=")[1];
-    console.log(token);
+    //console.log(cookie," cookie for test the jwt")
+    const token = cookie.split("=")[4];         //for further problem here put split + and number 1 or 4
 
     Jwt.verify(token, "jwtkey", (err, userInfo) => {
         if(err){

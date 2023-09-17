@@ -62,7 +62,7 @@ export const getNotification = async (req, res, next) => {
     });
   }
 
-  setInterval(NotificationCleaner,5000);
+  setInterval(NotificationCleaner,5000000); //after 5000 s
 
 
   
