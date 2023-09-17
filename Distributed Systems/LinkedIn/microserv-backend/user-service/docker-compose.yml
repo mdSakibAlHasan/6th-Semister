@@ -1,19 +1,18 @@
-version: '3.8'
+version: "3.8"
 services:
   mysql:
     image: mysql:8.0
     container_name: mysql-container1
     environment:
-      MYSQL_ROOT_PASSWORD: password  # Change this to your desired root password
-      MYSQL_DATABASE: likedin  # Change this to your desired database name
+      MYSQL_ROOT_PASSWORD: password # Change this to your desired root password
+      MYSQL_DATABASE: likedin # Change this to your desired database name
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
-      - "3306:3306"
+      - "3307:3307"
     command: --default-authentication-plugin=mysql_native_password
     networks:
       - internalnet
-
 
   server:
     image: user_service
@@ -22,8 +21,6 @@ services:
     networks:
       - internalnet
 
-
 networks:
   internalnet:
     driver: bridge
-

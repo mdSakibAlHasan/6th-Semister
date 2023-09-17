@@ -17,7 +17,7 @@ export default function FeedCard(props) {
     <>
       <div className='shade2 p-2 m-2 display-block'>
         <div className="row">
-          <div className="display-6">{props.name}</div>
+          {/* <div className="display-6">{props.name}</div> */}
           <div><small>{props.time}</small></div> <hr />
           <div>{props.story}</div> <hr />
           {imgsrc && <img src={props.picture} alt="Photo" />} {/* Display the image */}

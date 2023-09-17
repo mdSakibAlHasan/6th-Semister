@@ -10,7 +10,7 @@ export const getPostInfo = async (req, res, next) => {
     try{
     const cookie = req.headers.cookie;
     console.log(cookie, "is the cookie");
-    const token = cookie.split("=")[1];
+    const token = cookie.split("=")[4];
     console.log(token, "is the token");
 
     Jwt.verify(token, "jwtkey", (err, userInfo) => {
@@ -19,7 +19,7 @@ export const getPostInfo = async (req, res, next) => {
             return res.status(401).json("Not authenticated!");
         }
         console.log("UserInfo: ",userInfo.UserID);
-        const query = 'SELECT PostID, UserInfo.UserID, Text, Image, PostTime, Name  FROM UserInfo JOIN PostInfo ON PostInfo.UserID = UserInfo.UserID where PostInfo.UserID <> ? ORDER BY PostInfo.PostTime DESC;';
+        const query = 'SELECT PostID, UserID, Text, Image, PostTime FROM PostInfo  where UserID <> ? ORDER BY PostTime DESC;';
         db.query(query, [userInfo.UserID], (err, results) => {
             if (err) {
                 console.error('Error get information from database:', err);
