@@ -7,25 +7,38 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
 export const getUserName = async (req, res) => {
-     const originalArray = req.body.data;
+    const originalArray = req.body.posts;
 
-     const modifiedArray = originalArray.map((item) => {
-         const name = findNameByUserID(item.UserID); // Implement this function
-         return { ...item, UserName: name };
-     });
- 
-     res.json(modifiedArray);
+    const modifiedArray = await Promise.all(
+        originalArray.map(async (item) => {
+            try {
+                const name = await findNameByUserID(item.UserID);
+                return { ...item, UserName: name };
+            } catch (err) {
+                // Handle errors here if needed
+                console.error('Error getting name by UserID:', err);
+                return { ...item, UserName: null }; // You can set a default value if an error occurs
+            }
+        })
+    );
+
+    //console.log('Modified Array:', modifiedArray);
+    res.json(modifiedArray);
 };
 
 function findNameByUserID(userID) {
-    const querey= 'select Name from UserInfo where UserID=?;';
-    db.query(querey, [userID], (err, result) => {
-        if (err) {
-            console.error('Error get information from database:', err);
-            return res.status(500).json("Internal server error");;
-        }
-
-        console.log(result['Name']);
+    return new Promise((resolve, reject) => {
+        const query = 'SELECT Name FROM UserInfo WHERE UserID = ?';
+        db.query(query, [userID], (err, result) => {
+            if (err) {
+                console.error('Error querying the database:', err);
+                reject(err);
+            } else if (result.length > 0) {
+                resolve(result[0].Name);
+            } else {
+                resolve(null); // Handle the case where no result is found for the given userID
+            }
+        });
     });
-    return result['Name'];
 }
+

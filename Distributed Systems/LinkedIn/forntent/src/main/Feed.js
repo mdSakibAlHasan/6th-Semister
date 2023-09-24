@@ -44,7 +44,7 @@ export default function Feed() {
           <div className="shade2 p-5 rounded">
         <h3><Link to="/post">Post</Link></h3>
         <div className='shade1 p-3 full_page_height' style={{ display: "inline-block" }}>
-            {postInfo.map((feed)=><FeedCard name={feed.Name} time={feed.PostTime} story={feed.Text} picture={feed.Image}/>)}
+            {postInfo.map((feed)=><FeedCard name={feed.UserName} time={feed.PostTime} story={feed.Text} picture={feed.Image}/>)}
       </div>
       </div>
       </div>
