@@ -4,6 +4,7 @@ import  Jwt  from "jsonwebtoken";
 import { Client as Minio } from 'minio';
 import fs from "fs";
 import dotenv from 'dotenv';
+import axios from "axios";
 
 dotenv.config();
 
@@ -112,16 +113,5 @@ export const setPostInfo =  (req, res, next) => {
 
 
   const NotificationUpdate = (PostID, UserID) =>{
-    db.query(
-      "INSERT INTO Notification (PostID, UserID, Status) select ?, UserID, 1 from UserInfo where UserID <> ?;",
-      [PostID, UserID],
-      (error, results) => {
-        if (error) {
-          console.log(error);
-          console.log("Database querey problem ")
-        }
-
-        console.log("Successfull update ")
-      }
-    );
+    axios.post('http://localhost:3007/app/setNotification', { PostID:PostID, UserID:UserID });
   }

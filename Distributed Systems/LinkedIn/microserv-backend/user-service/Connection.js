@@ -26,6 +26,29 @@ export const getUserName = async (req, res) => {
     res.json(modifiedArray);
 };
 
+
+
+export const getNotificationUserName = async (req, res) => {
+    const { UserID } = req.body;
+    console.log(UserID," is userID")
+    const querey = 'select UserID, (select Name from UserInfo where UserID=?) as Name from UserInfo where UserID <> ?';
+
+    db.query(querey,[UserID, UserID],(err, result)=>{
+        if(err){
+            console.log("Error to get notificationInfo info");
+            res.status(500).json("Err to querey");
+        }
+        else{
+            console.log("COmplete querey",result);
+            res.json(result);
+        }
+    })
+
+    //console.log('Modified Array:', modifiedArray);
+    //res.json();
+};
+
+
 function findNameByUserID(userID) {
     return new Promise((resolve, reject) => {
         const query = 'SELECT Name FROM UserInfo WHERE UserID = ?';
@@ -41,4 +64,6 @@ function findNameByUserID(userID) {
         });
     });
 }
+
+
 
