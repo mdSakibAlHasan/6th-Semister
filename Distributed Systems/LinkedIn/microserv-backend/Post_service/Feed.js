@@ -11,7 +11,7 @@ export const getPostInfo = async (req, res, next) => {
     try{
     const cookie = req.headers.cookie;
     console.log(cookie, "is the cookie");
-    const token = cookie.split("=")[1];     //put here 4 
+    const token = cookie.split("=")[1];     //put here 4
     console.log(token, "is the token");
 
     Jwt.verify(token, "jwtkey", (err, userInfo) => {
