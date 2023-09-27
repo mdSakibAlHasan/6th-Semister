@@ -28,17 +28,25 @@ export const getNotification = async (req, res, next) => {
             return res.status(401).json("Not authenticated!");
         }
         console.log("UserInfo: ",userInfo.UserID);
-        const query = `select Notification.PostID,Notification.UserID, UserInfo.Name, PostInfo.PostTime, PostInfo.Image, PostInfo.Text from Notification, PostInfo, UserInfo 
-        where Notification.PostID = PostInfo.PostID and PostInfo.UserID = UserInfo.UserID
-        and Notification.UserID = ? and Notification.Status = true;`;
+        const query = 'select PostID, Name, UserID from Notification where UserID = ? and Status = true;';
         db.query(query, [userInfo.UserID], (err, results) => {
             if (err) {
                 console.error('Error get information from database:', err);
                 return res.status(500).json("Internal server error");
             }
 
-            console.log(results);
-            return res.status(200).send(results);
+            const posts = results.map((row) => ({
+                PostID: row.PostID,
+                Name: row.Name,
+                UserID: row.UserID,
+            }));
+            axios.post('http://localhost:3006/app/getNotificationDetails', { posts })
+            .then((response) => {
+                return res.status(200).send(response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
         });
     })
     }
@@ -52,40 +60,28 @@ export const getNotification = async (req, res, next) => {
     const { PostID, UserID } = req.body;
     console.log(req.body);
     axios.post('http://localhost:3005/app/getNotificationUserName', {UserID:UserID })
-                .then((response) => {
-                    // Handle the response from server1
-                   
-                    console.log(response.data," is the name add data");
-                    res.status(200).json("successfull update");
-                    const values = response.data.map((item) => [PostID,item.UserID,1, item.Name,]);
-                    const sql = 'INSERT INTO Notification (PostID,UserID,Status, Name) VALUES ?';
-                    console.log(values);
-                    // Execute the query
-                    db.query(sql, [values], (error, results) => {
-                    if (error) {
-                        console.error('Error inserting data:', error);
-                    } else {
-                        console.log('Data inserted successfully:', results);
-                    }
-                    });
-                })
-                .catch((error) => {
-                    // Handle errors
-                    console.error(error);
-                    res.status(500).json("Internal rror");
-                });
-    // db.query(
-    //   "INSERT INTO Notification (PostID, UserID, Status) select ?, UserID, 1 from UserInfo where UserID <> ?;",
-    //   [PostID, UserID],
-    //   (error, results) => {
-    //     if (error) {
-    //       console.log(error);
-    //       console.log("Database querey problem ")
-    //     }
-
-    //     console.log("Successfull update ")
-    //   }
-    // );
+        .then((response) => {
+            // Handle the response from server1
+            
+            console.log(response.data," is the name add data");
+            res.status(200).json("successfull update");
+            const values = response.data.map((item) => [PostID,item.UserID,1, item.Name,]);
+            const sql = 'INSERT INTO Notification (PostID,UserID,Status, Name) VALUES ?';
+            console.log(values);
+            // Execute the query
+            db.query(sql, [values], (error, results) => {
+            if (error) {
+                console.error('Error inserting data:', error);
+            } else {
+                console.log('Data inserted successfully:', results);
+            }
+            });
+        })
+        .catch((error) => {
+            // Handle errors
+            console.error(error);
+            res.status(500).json("Internal rror");
+        });
   }
 
 

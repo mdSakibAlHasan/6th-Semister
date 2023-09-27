@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/notification',getNotification);
 router.post('/setNotification',setNotification);
-router.get('/getPostDetails',getPostDetails);
+router.post('/getPostDetails',getPostDetails);
 
 
 export default router;

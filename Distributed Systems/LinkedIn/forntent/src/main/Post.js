@@ -51,6 +51,7 @@ export default function Post() {
         },
       });
 
+      alert("successfull post complete");
       console.log(response.data);
       toast.success('Post Successful', {
         position: toast.POSITION.TOP_CENTER,

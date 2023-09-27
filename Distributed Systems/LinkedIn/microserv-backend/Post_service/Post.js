@@ -13,8 +13,8 @@ export const minioClient = new Minio({
   endPoint: 'localhost',
   port: 9000,
   useSSL: false,
-  accessKey: process.env.MINIO_ACCESS_KEY,
-  secretKey: process.env.MINIO_SECRECT_KEY,
+  accessKey: '44Ede1q8sa8uRHXBZ52K',
+  secretKey: '8H5S84ijB5wRES2YgTRELVowwNj4mLk8ZiYV2kkr',
 });
 
 
@@ -57,13 +57,13 @@ export const setPostInfo =  (req, res, next) => {
           return res.status(400).json({ error: "Multer error" });
         } else if (err) {
           console.log(err);
-          return res.status(500).json({ error: "Internal server error" });
+          return res.status(500).json({ error: "Internal server error in multer" });
         }
 
         var path =(req.file && req.file.filename);
         const fileStream = (file && fs.createReadStream(filePath));
         const time = getCurrentTimestamp();
-        //console.log(req.file,"///////",path,"==========",text,"======",cookie);
+        console.log(req.file,"///////",path,"==========",text,"======",cookie);
         Jwt.verify(cookie, "jwtkey", (err, userInfo) => {
           if(err){
             return res.status(401).json("Not authenticated!");
