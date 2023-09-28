@@ -2,7 +2,7 @@
 CREATE TABLE IF NOT EXISTS Notification (
   PostID INT,
   UserID INT,
-  UserName VARCHAR(255),
+  Name VARCHAR(255),
   Status BOOLEAN,
   PRIMARY KEY (PostID, UserID)
 );
