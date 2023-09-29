@@ -40,7 +40,7 @@ export const getNotification = async (req, res, next) => {
                 Name: row.Name,
                 UserID: row.UserID,
             }));
-            axios.post('http://localhost:3006/app/getNotificationDetails', { posts })
+            axios.post('http://post_server:3006/app/getNotificationDetails', { posts })
             .then((response) => {
                 return res.status(200).send(response.data);
             })
@@ -59,7 +59,7 @@ export const getNotification = async (req, res, next) => {
   export const setNotification = async (req,res) =>{
     const { PostID, UserID } = req.body;
     console.log(req.body);
-    axios.post('http://localhost:3005/app/getNotificationUserName', {UserID:UserID })
+    axios.post('http://user_server:3005/app/getNotificationUserName', {UserID:UserID })
         .then((response) => {
             // Handle the response from server1
             

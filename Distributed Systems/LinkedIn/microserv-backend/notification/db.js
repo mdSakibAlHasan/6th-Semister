@@ -6,9 +6,10 @@ dotenv.config();
 
 
 export const db = mysql2.createConnection({
-  host: "localhost",              //for docker replace mysql
-  user: "sakib",
-  password: process.env.DB_PASSWORD,
+  host: "mysql-notification-container1",              //for docker replace mysql
+  port: 3309,
+  user: "root",
+  password: "password",
   database: "likedin",
 });
 

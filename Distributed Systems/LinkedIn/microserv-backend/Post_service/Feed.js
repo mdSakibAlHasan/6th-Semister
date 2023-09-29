@@ -33,7 +33,7 @@ export const getPostInfo = async (req, res, next) => {
                 Image: row.Image,
                 PostTime: row.PostTime,
             }));
-            axios.post('http://localhost:3005/app/getUser', { posts })
+            axios.post('http://user_server:3005/app/getUser', { posts })
                 .then((response) => {
                     // Handle the response from server1
                    

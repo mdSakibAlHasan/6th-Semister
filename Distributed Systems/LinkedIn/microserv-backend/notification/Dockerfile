@@ -10,5 +10,5 @@ COPY . .
 
 EXPOSE 3006
 
-CMD ["./wait-for-mysql.sh", "mysql-post-container1:3308","npm", "start"]
+CMD ["./wait-for-mysql.sh", "mysql-notification-container1:3309","npm", "start"]
 

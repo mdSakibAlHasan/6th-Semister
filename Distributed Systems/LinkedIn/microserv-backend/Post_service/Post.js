@@ -77,7 +77,7 @@ export const setPostInfo =  (req, res, next) => {
               if (err) {
                 return console.log(err);
               }
-              path = `http://127.0.0.1:9000/likedin/${file.filename}`;
+              path = `http://minio:9000/likedin/${file.filename}`;
               console.log(path); 
               const query = 'INSERT INTO PostInfo (UserID, Text, Image, PostTime) VALUES (?, ?, ?, ?)';
               db.query(query, [userInfo.UserID, text, path, time], (err, results) => {
@@ -113,5 +113,5 @@ export const setPostInfo =  (req, res, next) => {
 
 
   const NotificationUpdate = (PostID, UserID) =>{
-    axios.post('http://localhost:3007/app/setNotification', { PostID:PostID, UserID:UserID });
+    axios.post('http://notification_server:3007/app/setNotification', { PostID:PostID, UserID:UserID });
   }
