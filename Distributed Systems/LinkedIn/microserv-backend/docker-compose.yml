@@ -70,16 +70,7 @@ services:
       MINIO_ROOT_USER: 44Ede1q8sa8uRHXBZ52K
       MINIO_ROOT_PASSWORD: 8H5S84ijB5wRES2YgTRELVowwNj4mLk8ZiYV2kkr
     command: server --console-address ":9001" /data
-    # image: minio/minio:latest
-    # ports:
-    #   - "9000:9000"
-    #   - "9050:9050"
-    # environment:
-    #   MINIO_ROOT_USER: 44Ede1q8sa8uRHXBZ52K
-    #   MINIO_ROOT_PASSWORD: 8H5S84ijB5wRES2YgTRELVowwNj4mLk8ZiYV2kkr
-    # command: server --address 0.0.0.0:9000 /data
-    # volumes:
-    #   - minio-data:/data
+    
 
   user_server:
     image: user_service
@@ -124,7 +115,16 @@ services:
       - "3007"
     command: ["./wait-for-mysql.sh", "mysql-notification-container1:3309", "npm", "start"]
 
-  
+  forntent:
+    image: forntent
+    build: ./../forntent
+    restart: unless-stopped
+    networks:
+      - internalnet
+    ports:
+      - "3000:3000"
+    expose:
+      - "3000"
 
 networks:
   internalnet:
