@@ -57,13 +57,15 @@ services:
     networks:
       - internalnet
 
-  minio:
-    image: minio/minio
+  postobj:
+    image: minio/minio:latest
     ports:
       - "9000:9000"
       - "9001:9001"
     volumes:
       - minio_storage:/data
+    networks:
+      - internalnet
     environment:
       MINIO_ROOT_USER: 44Ede1q8sa8uRHXBZ52K
       MINIO_ROOT_PASSWORD: 8H5S84ijB5wRES2YgTRELVowwNj4mLk8ZiYV2kkr

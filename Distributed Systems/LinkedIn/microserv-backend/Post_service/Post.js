@@ -10,7 +10,7 @@ dotenv.config();
 
 
 export const minioClient = new Minio({
-  endPoint: 'localhost',
+  endPoint: 'postobj',
   port: 9000,
   useSSL: false,
   accessKey: '44Ede1q8sa8uRHXBZ52K',
@@ -77,7 +77,7 @@ export const setPostInfo =  (req, res, next) => {
               if (err) {
                 return console.log(err);
               }
-              path = `http://minio:9000/likedin/${file.filename}`;
+              path = `http://127.0.0.1:9000/likedin/${file.filename}`;
               console.log(path); 
               const query = 'INSERT INTO PostInfo (UserID, Text, Image, PostTime) VALUES (?, ?, ?, ?)';
               db.query(query, [userInfo.UserID, text, path, time], (err, results) => {
