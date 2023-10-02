@@ -19,7 +19,7 @@ export default function Feed() {
           console.log(cookie);
           try {
             const result = await axios.get(
-              "http://localhost:3006/app/news",
+              "http://localhost/post/news",
               {
                 withCredentials: true
               }

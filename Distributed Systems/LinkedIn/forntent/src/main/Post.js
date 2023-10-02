@@ -45,7 +45,7 @@ export default function Post() {
     console.log(formData,photo,postText);
 
     try {
-      const response = await axios.post("http://localhost:3006/app/post", formData, {
+      const response = await axios.post("http://localhost/post/post", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
