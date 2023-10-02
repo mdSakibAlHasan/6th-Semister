@@ -19,7 +19,7 @@ export default function Registration() {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:3005/app/register", input);
+      const response = await axios.post("http://localhost/user/register", input);
 
       if (response.data.message === "User registered successfully.") {
         navigate("/home");
