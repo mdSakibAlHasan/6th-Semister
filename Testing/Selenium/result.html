@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GCF and LCM Calculator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #f2f2f2;
+      }
+      .calculator {
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        width: 400px;
+      }
+      input[type="number"] {
+        width: 100px;
+        padding: 5px;
+        margin: 5px;
+      }
+      button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+      #result {
+        font-weight: bold;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="calculator">
+      <h1>GCF and LCM Calculator</h1>
+      <label for="num1">Enter the first number:</label>
+      <input type="number" id="num1" required />
+      <br />
+      <label for="num2">Enter the second number:</label>
+      <input type="number" id="num2" required />
+      <br />
+      <button onclick="calculate()">Calculate</button>
+      <div id="result"></div>
+    </div>
+
+    <script>
+      function calculate() {
+        const num1 = parseInt(document.getElementById("num1").value);
+        const num2 = parseInt(document.getElementById("num2").value);
+
+        if (!isNaN(num1) && !isNaN(num2)) {
+          const gcf = calculateGCF(num1, num2);
+          const lcm = calculateLCM(num1, num2);
+          document.getElementById(
+            "result"
+          ).innerHTML = `GCF: ${gcf}<br>LCM: ${lcm}`;
+        } else {
+          document.getElementById("result").innerHTML =
+            "Please enter valid numbers.";
+        }
+      }
+
+      function calculateGCF(a, b) {
+        while (b !== 0) {
+          const temp = b;
+          b = a % b;
+          a = temp;
+        }
+        return a;
+      }
+
+      function calculateLCM(a, b) {
+        return (a * b) / calculateGCF(a, b);
+      }
+    </script>
+  </body>
+</html>
