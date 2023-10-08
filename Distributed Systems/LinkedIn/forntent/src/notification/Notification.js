@@ -20,7 +20,7 @@ export default function Notification() {
       } else {
         console.log(cookie);
         try {
-          const result = await axios.get("http://localhost:3007/app/notification", {
+          const result = await axios.get("http://localhost/notify/notification", {
             withCredentials: true,
           });
           setPostInfo(result.data);
@@ -35,7 +35,7 @@ export default function Notification() {
   }, []);
 
   const handleNotificationClick = async (postID, UserID) => {
-    const result = await axios.post("http://localhost:3007/app/getPostDetails", {
+    const result = await axios.post("http://localhost/notify/getPostDetails", {
             PostID: postID,
             UserID: UserID,
     });
