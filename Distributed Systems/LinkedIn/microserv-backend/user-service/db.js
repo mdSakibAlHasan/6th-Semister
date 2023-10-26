@@ -6,7 +6,7 @@ dotenv.config();
 
 
 export const db = mysql2.createConnection({
-  host: "mysql-container1",          //put here mysql
+  host: "mysql_user",          //put here mysql
   port: 3307, 
   user: "root",              //root
   password: "password",
