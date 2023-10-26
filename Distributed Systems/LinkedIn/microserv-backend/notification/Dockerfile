@@ -8,7 +8,7 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 3006
+EXPOSE 3007
 
-CMD ["./wait-for-mysql.sh", "mysql-notification-container1:3309","npm", "start"]
+CMD ["npm", "start"]
 

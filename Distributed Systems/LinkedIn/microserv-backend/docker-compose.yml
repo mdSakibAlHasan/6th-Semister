@@ -16,7 +16,6 @@ services:
 
   forntent:
     image: forntent
-    build: ./../forntent
     restart: unless-stopped
     networks:
       - internalnet
@@ -102,7 +101,6 @@ services:
 
   user_server:
     image: user_service
-    build: ./user-service
     restart: unless-stopped
     depends_on:
       - mysql_user
@@ -112,26 +110,23 @@ services:
       - "3005:3005"
     expose:
       - "3005"
-    command: ["./wait-for-mysql.sh", "mysql-container1:3307", "npm", "start"]
     
 
   post_server:
     image: post_service
-    build: ./Post_service
     restart: unless-stopped
     depends_on:
       - mysql_post
+      - postobj
     networks:
       - internalnet
     ports:
       - "3006:3006"
     expose:
       - "3006"
-    command: ["./wait-for-mysql.sh", "mysql-post-container1:3308", "npm", "start"]
 
   notification_server:
     image: notification_service
-    build: ./notification
     restart: unless-stopped
     depends_on:
       - mysql_notification
@@ -141,7 +136,6 @@ services:
       - "3007:3007"
     expose:
       - "3007"
-    command: ["./wait-for-mysql.sh", "mysql-notification-container1:3309", "npm", "start"]
 
 networks:
   internalnet:
