@@ -21,6 +21,7 @@ export default function Login() {
 
     try {
       const response = await axios.post("http://localhost/user/login", input);
+      //const response = await axios.post("http://localhost:3001/app/login", input);
       console.log(response);
       Cookies.set('my_cookies', response.data, { expires: 0.5 });
       navigate("/home");

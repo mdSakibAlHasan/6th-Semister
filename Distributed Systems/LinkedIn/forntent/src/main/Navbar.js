@@ -4,6 +4,16 @@ import { Link } from 'react-router-dom';
 import logo from './logo.png';
 //import './Navbar.css'; // Create a separate CSS file for Navbar styles
 
+const logout = () =>{
+  document.cookie.split(';').forEach(function(cookie) {
+    const cookieName = cookie.split('=')[0].trim();
+    document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+  });
+
+  // Redirect the user to a logged-out page (you can change the URL)
+  window.location.href = '/login';
+}
+
 const Navbar = () => {
   return (
     <nav className="navbar">
@@ -14,6 +24,7 @@ const Navbar = () => {
         <Link to="/home">Home</Link>
         <Link to="/post">Post</Link>
         <Link to="/notification">Notification</Link>
+        <button onClick={logout}>Logout</button>
       </div>
     </nav>
   );
